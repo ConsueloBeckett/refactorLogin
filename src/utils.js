@@ -1,8 +1,12 @@
-const bcrypt = require ('bcrypt') 
+import bcrypt from 'bcrypt' 
+import { fileURLToPath } from 'url'
+import {dirname} from 'path'
 
-const createHash = password => bcrypt.hashSync(password,bcrypt.genSaltSync(10))
 
+export const createHash = password => bcrypt.hashSync(password,bcrypt.genSaltSync(10))
+export const isValidPassword = (user, password) => bcrypt.compareSync(user.password, password)
 
- const isValidPassword = (user, password) => bcrypt.compareSync(user.password, password)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-module.export = bcrypt
+export default __dirname
